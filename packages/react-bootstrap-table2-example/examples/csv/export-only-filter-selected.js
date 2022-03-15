@@ -72,34 +72,57 @@ const selectRow = {
 </ToolkitProvider>
 `;
 
-export default () => {
-  console.log('');
-  return (
-    <div>
-      <h3>Export all the filtered/searched rows</h3>
-      <ToolkitProvider
-        keyField="id"
-        data={ products }
-        columns={ columns }
-        exportCSV={ { onlyExportFiltered: false, exportAll: false } }
-        search
-      >
-        {
-          props => (
-            <div>
-              <ExportCSVButton { ...props.csvProps } >Export CSV </ExportCSVButton>
-              <hr />
-              <SearchBar { ...props.searchProps } />
-              <BootstrapTable
-                { ...props.baseProps }
-                pagination={ paginationFactory() }
-                filter={ filterFactory() }
-              />
-            </div>
-          )
-        }
-      </ToolkitProvider>
-      <Code>{ sourceCode }</Code>
-    </div>
-  );
-};
+class ExportOnlyFilterSelected extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      onlyFilter: true
+    };
+  }
+  onChangeFalse = () => {
+    this.setState({ onlyFilter: false });
+  };
+  onChangeTrue = () => {
+    this.setState({ onlyFilter: true });
+  };
+  render() {
+    return (
+      <div>
+        <h3>Export all the filtered/searched rows</h3>
+        <ToolkitProvider
+          keyField="id"
+          data={ products }
+          columns={ columns }
+          exportCSV={ { onlyExportFiltered: this.state.onlyFilter, exportAll: false } }
+          search
+        >
+          {
+            props => (
+              <div>
+                <ExportCSVButton onClick={ () => this.onChangeTrue() } >
+                  Export All Page
+                </ExportCSVButton>
+                <ExportCSVButton onClick={ () => this.onChangeFalse() } >
+                  Export Current Page
+                </ExportCSVButton>
+                <ExportCSVButton { ...props.csvProps } >
+                  Export CSV
+                </ExportCSVButton>
+                <hr />
+                <SearchBar { ...props.searchProps } />
+                <BootstrapTable
+                  { ...props.baseProps }
+                  pagination={ paginationFactory() }
+                  filter={ filterFactory() }
+                />
+              </div>
+            )
+          }
+        </ToolkitProvider>
+        <Code>{ sourceCode }</Code>
+      </div>
+    );
+  }
+}
+
+export default ExportOnlyFilterSelected;

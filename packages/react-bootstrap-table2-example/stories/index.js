@@ -7,6 +7,7 @@ import Welcome from 'examples/welcome';
 
 // basic
 import BasicTable from 'examples/basic';
+import MenuContext from 'examples/basic/menucontext';
 import BorderlessTable from 'examples/basic/borderless-table';
 import StripHoverCondensedTable from 'examples/basic/striped-hover-condensed-table';
 import NoDataTable from 'examples/basic/no-data-table';
@@ -212,6 +213,7 @@ import CustomCSVHeader from 'examples/csv/custom-csv-header';
 import HideCSVColumn from 'examples/csv/hide-column';
 import ExportOnlySelected from 'examples/csv/export-only-selected';
 import ExportOnlyFiltered from 'examples/csv/export-only-filtered';
+import ExportOnlyFilteredSelected from 'examples/csv/export-only-filter-selected';
 import CSVColumnType from 'examples/csv/csv-column-type';
 import CustomCSVButton from 'examples/csv/custom-csv-button';
 import ExportCustomData from 'examples/csv/export-custom-data';
@@ -261,6 +263,7 @@ storiesOf('Welcome', module).add('react bootstrap table 2 ', () => <Welcome />);
 storiesOf('Basic Table', module)
   .addDecorator(bootstrapStyle())
   .add('basic table', () => <BasicTable />)
+  .add('menu context', () => <MenuContext />)
   .add('striped, hover, condensed table', () => <StripHoverCondensedTable />)
   .add('borderless table', () => <BorderlessTable />)
   .add('Indication For Empty Table', () => <NoDataTable />)
@@ -488,6 +491,7 @@ storiesOf('Export CSV', module)
   .add('Hide CSV Column', () => <HideCSVColumn />)
   .add('Only Export Selected Rows', () => <ExportOnlySelected />)
   .add('Only Export Filtered/Searched Rows', () => <ExportOnlyFiltered />)
+  .add('Only Export Filtered/Searched Rows/Selected', () => <ExportOnlyFilteredSelected />)
   .add('CSV Column Type', () => <CSVColumnType />)
   .add('Custom CSV Button', () => <CustomCSVButton />)
   .add('Export Custom Data', () => <ExportCustomData />)
