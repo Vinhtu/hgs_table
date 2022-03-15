@@ -49,4 +49,10 @@ $ yarn storybook
 
 ```
 
+***New Config code :
+
+Add component: ContextMenu in Basic Table,
+Add component: ExportOnlyFilteredSelected in Export CSV (User can choose to export all or export by selected filter)
+
+
 **Storybook examples: [`packages/react-bootstrap-table2-example/examples`](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/master/packages/react-bootstrap-table2-example/examples)**
