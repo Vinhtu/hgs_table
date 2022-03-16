@@ -3,7 +3,7 @@ import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
-import Popup from './Popup';
+import Popup from './popup';
 
 const products = productsGenerator();
 
@@ -32,9 +32,11 @@ const columns = [{
   text: 'Product Price'
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } />
+<BootstrapTable keyField="id" data={ products } columns={ columns } rowEvents={ this.rowEvents } />
+<Popup { ...this.state.popup } />
+<Code>{ sourceCode }</Code>
 `;
-export default class Menucontext extends React.Component {
+export default class ContextMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

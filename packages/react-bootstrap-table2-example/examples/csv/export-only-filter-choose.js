@@ -58,7 +58,15 @@ const selectRow = {
   {
     props => (
       <div>
-        <ExportCSVButton { ...props.csvProps }>Export CSV!!</ExportCSVButton>
+        <ExportCSVButton onClick={ () => this.onChangeTrue() } >
+          Export All Page
+        </ExportCSVButton>
+        <ExportCSVButton onClick={ () => this.onChangeFalse() } >
+          Export Current Page
+        </ExportCSVButton>
+        <ExportCSVButton { ...props.csvProps } >
+          Export CSV
+        </ExportCSVButton>
         <hr />
         <SearchBar { ...props.searchProps } />
         <BootstrapTable
@@ -71,8 +79,18 @@ const selectRow = {
   }
 </ToolkitProvider>
 `;
+const MyExportCSV = (props) => {
+  const handleClick = () => {
+    props.onExport();
+  };
+  return (
+    <div>
+      <button className="btn btn-success" onClick={ handleClick }>Export to CSV</button>
+    </div>
+  );
+};
 
-class ExportOnlyFilterSelected extends React.Component {
+class ExportOnlyFilterChoose extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -99,15 +117,19 @@ class ExportOnlyFilterSelected extends React.Component {
           {
             props => (
               <div>
-                <ExportCSVButton onClick={ () => this.onChangeTrue() } >
-                  Export All Page
-                </ExportCSVButton>
-                <ExportCSVButton onClick={ () => this.onChangeFalse() } >
-                  Export Current Page
-                </ExportCSVButton>
-                <ExportCSVButton { ...props.csvProps } >
-                  Export CSV
-                </ExportCSVButton>
+                <div style={ { display: 'flex' } }>
+                  <div style={ { marginRight: 4 } }>
+                    <ExportCSVButton onClick={ () => this.onChangeTrue() } >
+                      Export All Page
+                    </ExportCSVButton>
+                  </div>
+                  <div style={ { marginRight: 4 } }>
+                    <ExportCSVButton onClick={ () => this.onChangeFalse() } >
+                      Export Current Page
+                    </ExportCSVButton>
+                  </div>
+                  <MyExportCSV { ...props.csvProps } />
+                </div>
                 <hr />
                 <SearchBar { ...props.searchProps } />
                 <BootstrapTable
@@ -125,4 +147,4 @@ class ExportOnlyFilterSelected extends React.Component {
   }
 }
 
-export default ExportOnlyFilterSelected;
+export default ExportOnlyFilterChoose;
