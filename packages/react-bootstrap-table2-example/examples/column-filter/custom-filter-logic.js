@@ -49,41 +49,41 @@ class Table extends React.Component {
 }
 `;
 
-export default class Table extends React.Component {
-  filterByPrice = (filterVal, data) => {
+
+const Table = () => {
+  const filterByPrice = (filterVal, data) => {
     if (filterVal) {
       return data.filter(product => product.price == filterVal);
     }
     return data;
-  }
+  };
+  const columns = [{
+    dataField: 'id',
+    text: 'Product ID'
+  }, {
+    dataField: 'name',
+    text: 'Product Name',
+    filter: textFilter()
+  }, {
+    dataField: 'price',
+    text: 'Product Price',
+    filter: textFilter({
+      onFilter: filterByPrice
+    })
+  }];
 
-  render() {
-    const columns = [{
-      dataField: 'id',
-      text: 'Product ID'
-    }, {
-      dataField: 'name',
-      text: 'Product Name',
-      filter: textFilter()
-    }, {
-      dataField: 'price',
-      text: 'Product Price',
-      filter: textFilter({
-        onFilter: this.filterByPrice
-      })
-    }];
+  return (
+    <div>
+      <h2>Implement a eq price filter</h2>
+      <BootstrapTable
+        keyField="id"
+        data={ products }
+        columns={ columns }
+        filter={ filterFactory() }
+      />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
 
-    return (
-      <div>
-        <h2>Implement a eq price filter</h2>
-        <BootstrapTable
-          keyField="id"
-          data={ products }
-          columns={ columns }
-          filter={ filterFactory() }
-        />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+export default Table;

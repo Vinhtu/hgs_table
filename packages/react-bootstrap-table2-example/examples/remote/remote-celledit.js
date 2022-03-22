@@ -44,19 +44,13 @@ const RemoteCellEdit = (props) => {
   );
 };
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: products,
-      errorMessage: null
-    };
-  }
-
-  handleTableChange = (type, { data, cellEdit: { rowId, dataField, newValue } }) => {
+const Container = () => {
+  const [state, setState] = React.useState({ data: products, errorMessage: null });
+  const handleTableChange = (type, { data, cellEdit: { rowId, dataField, newValue } }) => {
     setTimeout(() => {
       if (newValue === 'test' && dataField === 'name') {
-        this.setState(() => ({
+        setState(() => ({
+          ...state,
           data,
           errorMessage: 'Oops, product name shouldn't be "test"'
         }));
@@ -69,24 +63,24 @@ class Container extends React.Component {
           }
           return row;
         });
-        this.setState(() => ({
+        setState(() => ({
+          ...state,
           data: result,
           errorMessage: null
         }));
       }
     }, 2000);
-  }
+  };
+  return (
+    <RemoteCellEdit
+      data={ state.data }
+      errorMessage={ state.errorMessage }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
-  render() {
-    return (
-      <RemoteCellEdit
-        data={ this.state.data }
-        errorMessage={ this.state.errorMessage }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+export default Container;
 `;
 
 
@@ -117,19 +111,13 @@ RemoteCellEdit.propTypes = {
   errorMessage: PropTypes.string.isRequired
 };
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: products,
-      errorMessage: null
-    };
-  }
-
-  handleTableChange = (type, { data, cellEdit: { rowId, dataField, newValue } }) => {
+const Container = () => {
+  const [state, setState] = React.useState({ data: products, errorMessage: null });
+  const handleTableChange = (type, { data, cellEdit: { rowId, dataField, newValue } }) => {
     setTimeout(() => {
       if (newValue === 'test' && dataField === 'name') {
-        this.setState(() => ({
+        setState(() => ({
+          ...state,
           data,
           errorMessage: 'Oops, product name shouldn\'t be "test"'
         }));
@@ -142,23 +130,21 @@ class Container extends React.Component {
           }
           return row;
         });
-        this.setState(() => ({
+        setState(() => ({
+          ...state,
           data: result,
           errorMessage: null
         }));
       }
     }, 2000);
-  }
-
-  render() {
-    return (
-      <RemoteCellEdit
-        data={ this.state.data }
-        errorMessage={ this.state.errorMessage }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+  };
+  return (
+    <RemoteCellEdit
+      data={ state.data }
+      errorMessage={ state.errorMessage }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
 export default Container;

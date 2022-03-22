@@ -44,24 +44,27 @@ const defaultSorted = [{
   order: 'desc'
 }];
 
-<BootstrapTable
-  keyField="id"
-  data={ products }
-  columns={ columns }
-  defaultSortDirection="asc"
-/>
+const DefaultSortDirectionTable = () => {
+  console.log();
+  return (
+    <div>
+      <BootstrapTable keyField="id" data={ products } columns={ columns } defaultSortDirection="asc" />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default DefaultSortDirectionTable;
 `;
 
-
-class DefaultSortDirectionTable extends React.PureComponent {
-  render() {
-    return (
-      <div>
-        <BootstrapTable keyField="id" data={ products } columns={ columns } defaultSortDirection="asc" />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+const DefaultSortDirectionTable = () => {
+  console.log();
+  return (
+    <div>
+      <BootstrapTable keyField="id" data={ products } columns={ columns } defaultSortDirection="asc" />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
 
 export default DefaultSortDirectionTable;

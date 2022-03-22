@@ -121,43 +121,39 @@ RemotePagination.propTypes = {
   onTableChange: PropTypes.func.isRequired
 };
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+const Container = () => {
+  const [state, setState] = React.useState(
+    {
       page: 1,
       loading: false,
       data: products.slice(0, 10),
       sizePerPage: 10
-    };
-  }
-
-  handleTableChange = (type, { page, sizePerPage }) => {
+    }
+  );
+  const handleTableChange = (type, { page, sizePerPage }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
-      this.setState(() => ({
+      setState(() => ({
+        ...state,
         page,
         loading: false,
         data: products.slice(currentIndex, currentIndex + sizePerPage),
         sizePerPage
       }));
     }, 3000);
-    this.setState(() => ({ loading: true }));
-  }
-
-  render() {
-    const { data, sizePerPage, page, loading } = this.state;
-    return (
-      <RemotePagination
-        data={ data }
-        page={ page }
-        loading={ loading }
-        sizePerPage={ sizePerPage }
-        totalSize={ products.length }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+    setState(() => ({ ...state, loading: true }));
+  };
+  const { data, sizePerPage, page, loading } = state;
+  return (
+    <RemotePagination
+      data={ data }
+      page={ page }
+      loading={ loading }
+      sizePerPage={ sizePerPage }
+      totalSize={ products.length }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
 export default Container;

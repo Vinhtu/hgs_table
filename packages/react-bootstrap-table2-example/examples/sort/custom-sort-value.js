@@ -48,31 +48,38 @@ const columns = [{
   sortValue: (cell, row) => types[cell]
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } />
+const Test = () => {
+  const [state, setState] = React.useState({ data: jobs });
+  const handleClick = () => {
+    const newProducts = jobsGenerator1(21);
+    setState({ ...state, data: newProducts });
+  };
+  return (
+    <div>
+      <button className="btn btn-default" onClick={ handleClick }>Change Data</button>
+      <BootstrapTable keyField="id" data={ state.data } columns={ columns } />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default Test;
 `;
 
-export default class Test extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { data: jobs };
-  }
 
-  handleClick = () => {
-    this.setState(() => {
-      const newProducts = jobsGenerator1(21);
-      return {
-        data: newProducts
-      };
-    });
-  }
+const Test = () => {
+  const [state, setState] = React.useState({ data: jobs });
+  const handleClick = () => {
+    const newProducts = jobsGenerator1(21);
+    setState({ ...state, data: newProducts });
+  };
+  return (
+    <div>
+      <button className="btn btn-default" onClick={ handleClick }>Change Data</button>
+      <BootstrapTable keyField="id" data={ state.data } columns={ columns } />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div>
-        <button className="btn btn-default" onClick={ this.handleClick }>Change Data</button>
-        <BootstrapTable keyField="id" data={ this.state.data } columns={ columns } />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+export default Test;

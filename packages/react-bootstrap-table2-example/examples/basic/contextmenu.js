@@ -36,42 +36,37 @@ const columns = [{
 <Popup { ...this.state.popup } />
 <Code>{ sourceCode }</Code>
 `;
-export default class ContextMenu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      popup: {
-        visible: false, x: 0, y: 0
-      }
-    };
-  }
-  rowEvents = {
+
+const ContextMenu = () => {
+  const [popup, setPopup] = React.useState({ visible: false, x: 0, y: 0 });
+
+  const rowEvents = {
     onContextMenu: (event, row, rowIndex) => {
       event.preventDefault();
-      if (!this.state.popup.visible) {
+      if (!popup.visible) {
         document.addEventListener('click', function onClickOutside() {
-          this.setState({ visible: false });
+          setPopup({ ...popup, visible: false });
           document.removeEventListener('click', onClickOutside);
         });
       }
-      this.setState({
-        popup: {
-          row,
-          rowIndex,
-          visible: !this.state.popup.visible,
-          x: event.clientX,
-          y: event.clientY
-        }
+      setPopup({
+        ...popup,
+        row,
+        rowIndex,
+        visible: !popup.visible,
+        x: event.clientX,
+        y: event.clientY
       });
     }
-  }
-  render() {
-    return (
-      <div>
-        <BootstrapTable keyField="id" data={ products } columns={ columns } rowEvents={ this.rowEvents } />
-        <Popup { ...this.state.popup } />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+  };
+
+  return (
+    <div>
+      <BootstrapTable keyField="id" data={ products } columns={ columns } rowEvents={ rowEvents } />
+      <Popup { ...popup } />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default ContextMenu;

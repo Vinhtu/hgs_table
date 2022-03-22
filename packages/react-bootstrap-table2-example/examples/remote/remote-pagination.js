@@ -37,40 +37,38 @@ const RemotePagination = ({ data, page, sizePerPage, onTableChange, totalSize })
   </div>
 );
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: 1,
-      data: products.slice(0, 10),
-      sizePerPage: 10
-    };
-  }
 
-  handleTableChange = (type, { page, sizePerPage }) => {
+const Container = () => {
+  const [state, setState] = React.useState({
+    page: 1,
+    data: products.slice(0, 10),
+    sizePerPage: 10
+  });
+  const handleTableChange = (type, { page, sizePerPage }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
-      this.setState(() => ({
+      setState(() => ({
+        ...state,
         page,
         data: products.slice(currentIndex, currentIndex + sizePerPage),
         sizePerPage
       }));
     }, 2000);
-  }
+  };
+  const { data, sizePerPage, page } = state;
+  return (
+    <RemotePagination
+      data={ data }
+      page={ page }
+      sizePerPage={ sizePerPage }
+      totalSize={ products.length }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
-  render() {
-    const { data, sizePerPage, page } = this.state;
-    return (
-      <RemotePagination
-        data={ data }
-        page={ page }
-        sizePerPage={ sizePerPage }
-        totalSize={ products.length }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+export default Container;
+
 `;
 
 const RemotePagination = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
@@ -95,39 +93,33 @@ RemotePagination.propTypes = {
   onTableChange: PropTypes.func.isRequired
 };
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: 1,
-      data: products.slice(0, 10),
-      sizePerPage: 10
-    };
-  }
-
-  handleTableChange = (type, { page, sizePerPage }) => {
+const Container = () => {
+  const [state, setState] = React.useState({
+    page: 1,
+    data: products.slice(0, 10),
+    sizePerPage: 10
+  });
+  const handleTableChange = (type, { page, sizePerPage }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
-      this.setState(() => ({
+      setState(() => ({
+        ...state,
         page,
         data: products.slice(currentIndex, currentIndex + sizePerPage),
         sizePerPage
       }));
     }, 2000);
-  }
-
-  render() {
-    const { data, sizePerPage, page } = this.state;
-    return (
-      <RemotePagination
-        data={ data }
-        page={ page }
-        sizePerPage={ sizePerPage }
-        totalSize={ products.length }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+  };
+  const { data, sizePerPage, page } = state;
+  return (
+    <RemotePagination
+      data={ data }
+      page={ page }
+      sizePerPage={ sizePerPage }
+      totalSize={ products.length }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
 export default Container;

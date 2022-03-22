@@ -39,28 +39,45 @@ const options = {
   totalSize: products.length
 };
 
-<PaginationProvider
-  pagination={ paginationFactory(options) }
->
-  {
-    ({
-      paginationProps,
-      paginationTableProps
-    }) => (
-      <div>
-        <PaginationListStandalone
-          { ...paginationProps }
-        />
-        <BootstrapTable
-          keyField="id"
-          data={ products }
-          columns={ columns }
-          { ...paginationTableProps }
-        />
-      </div>
-    )
-  }
-</PaginationProvider>
+const options = {
+  custom: true,
+  totalSize: products.length
+};
+// const pagination = paginationFactory(options);
+
+const StandalonePaginationList = () => {
+  console.log();
+  return (
+    <div>
+      <PaginationProvider
+        pagination={ paginationFactory(options) }
+      >
+        {
+          ({
+            paginationProps,
+            paginationTableProps
+          }) => (
+            <div>
+              <PaginationListStandalone
+                { ...paginationProps }
+              />
+              <BootstrapTable
+                keyField="id"
+                data={ products }
+                columns={ columns }
+                { ...paginationTableProps }
+              />
+            </div>
+          )
+        }
+      </PaginationProvider>
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default StandalonePaginationList;
+
 `;
 
 const options = {
@@ -69,34 +86,35 @@ const options = {
 };
 // const pagination = paginationFactory(options);
 
-export default class StandalonePaginationList extends React.Component {
-  render() {
-    return (
-      <div>
-        <PaginationProvider
-          pagination={ paginationFactory(options) }
-        >
-          {
-            ({
-              paginationProps,
-              paginationTableProps
-            }) => (
-              <div>
-                <PaginationListStandalone
-                  { ...paginationProps }
-                />
-                <BootstrapTable
-                  keyField="id"
-                  data={ products }
-                  columns={ columns }
-                  { ...paginationTableProps }
-                />
-              </div>
-            )
-          }
-        </PaginationProvider>
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+const StandalonePaginationList = () => {
+  console.log();
+  return (
+    <div>
+      <PaginationProvider
+        pagination={ paginationFactory(options) }
+      >
+        {
+          ({
+            paginationProps,
+            paginationTableProps
+          }) => (
+            <div>
+              <PaginationListStandalone
+                { ...paginationProps }
+              />
+              <BootstrapTable
+                keyField="id"
+                data={ products }
+                columns={ columns }
+                { ...paginationTableProps }
+              />
+            </div>
+          )
+        }
+      </PaginationProvider>
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default StandalonePaginationList;

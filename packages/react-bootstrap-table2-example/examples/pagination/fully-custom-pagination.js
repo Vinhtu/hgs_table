@@ -105,62 +105,59 @@ const options = {
   totalSize: products.length
 };
 
-export default class FullyCustomPagination extends React.Component {
-  handleNextPage = ({
+const FullyCustomPagination = () => {
+  const handleNextPage = ({
     page,
     onPageChange
   }) => () => {
     onPageChange(page + 1);
-  }
-
-  handlePrevPage = ({
+  };
+  const handlePrevPage = ({
     page,
     onPageChange
   }) => () => {
     onPageChange(page - 1);
-  }
-
-  handleSizePerPage = ({
+  };
+  const handleSizePerPage = ({
     page,
     onSizePerPageChange
   }, newSizePerPage) => {
     onSizePerPageChange(newSizePerPage, page);
-  }
-
-  render() {
-    return (
-      <div>
-        <PaginationProvider
-          pagination={ paginationFactory(options) }
-        >
-          {
-            ({
-              paginationProps,
-              paginationTableProps
-            }) => (
+  };
+  return (
+    <div>
+      <PaginationProvider
+        pagination={ paginationFactory(options) }
+      >
+        {
+          ({
+            paginationProps,
+            paginationTableProps
+          }) => (
+            <div>
               <div>
-                <div>
-                  <p>Current Page: { paginationProps.page }</p>
-                  <p>Current SizePerPage: { paginationProps.sizePerPage }</p>
-                </div>
-                <div className="btn-group" role="group">
-                  <button className="btn btn-primary" onClick={ this.handleNextPage(paginationProps) }>Next Page</button>
-                  <button className="btn btn-success" onClick={ this.handlePrevPage(paginationProps) }>Prev Page</button>
-                  <button className="btn btn-danger" onClick={ () => this.handleSizePerPage(paginationProps, 10) }>Size Per Page: 10</button>
-                  <button className="btn btn-warning" onClick={ () => this.handleSizePerPage(paginationProps, 25) }>Size Per Page: 25</button>
-                </div>
-                <BootstrapTable
-                  keyField="id"
-                  data={ products }
-                  columns={ columns }
-                  { ...paginationTableProps }
-                />
+                <p>Current Page: { paginationProps.page }</p>
+                <p>Current SizePerPage: { paginationProps.sizePerPage }</p>
               </div>
-            )
-          }
-        </PaginationProvider>
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+              <div className="btn-group" role="group">
+                <button className="btn btn-primary" onClick={ handleNextPage(paginationProps) }>Next Page</button>
+                <button className="btn btn-success" onClick={ handlePrevPage(paginationProps) }>Prev Page</button>
+                <button className="btn btn-danger" onClick={ () => handleSizePerPage(paginationProps, 10) }>Size Per Page: 10</button>
+                <button className="btn btn-warning" onClick={ () => handleSizePerPage(paginationProps, 25) }>Size Per Page: 25</button>
+              </div>
+              <BootstrapTable
+                keyField="id"
+                data={ products }
+                columns={ columns }
+                { ...paginationTableProps }
+              />
+            </div>
+          )
+        }
+      </PaginationProvider>
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default FullyCustomPagination;

@@ -73,19 +73,20 @@ const columns = [
 />
 `;
 
-export default class DefaultSortTable extends React.PureComponent {
-  render() {
-    return (
-      <div>
-        <BootstrapTable
-          keyField="id"
-          data={ products }
-          columns={ columns }
-          filter={ filterFactory() }
-          defaultSorted={ defaultSorted }
-        />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+const DefaultSortTable = () => {
+  console.log();
+  return (
+    <div>
+      <BootstrapTable
+        keyField="id"
+        data={ products }
+        columns={ columns }
+        filter={ filterFactory() }
+        defaultSorted={ defaultSorted }
+      />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default DefaultSortTable;

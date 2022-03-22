@@ -53,15 +53,9 @@ const RemoteFilter = props => (
   </div>
 );
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: products
-    };
-  }
-
-  handleTableChange = (type, { filters }) => {
+const Container = () => {
+  const [data, setData] = React.useState(products);
+  const handleTableChange = (type, { filters }) => {
     setTimeout(() => {
       const result = products.filter((row) => {
         let valid = true;
@@ -79,21 +73,19 @@ class Container extends React.Component {
         }
         return valid;
       });
-      this.setState(() => ({
-        data: result
-      }));
+      setData(result);
     }, 2000);
-  }
+  };
+  return (
+    <RemoteFilter
+      data={ data }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
-  render() {
-    return (
-      <RemoteFilter
-        data={ this.state.data }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+export default Container;
+
 `;
 
 const RemoteFilter = props => (
@@ -115,15 +107,9 @@ RemoteFilter.propTypes = {
   onTableChange: PropTypes.func.isRequired
 };
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: products
-    };
-  }
-
-  handleTableChange = (type, { filters }) => {
+const Container = () => {
+  const [data, setData] = React.useState(products);
+  const handleTableChange = (type, { filters }) => {
     setTimeout(() => {
       const result = products.filter((row) => {
         let valid = true;
@@ -141,20 +127,15 @@ class Container extends React.Component {
         }
         return valid;
       });
-      this.setState(() => ({
-        data: result
-      }));
+      setData(result);
     }, 2000);
-  }
-
-  render() {
-    return (
-      <RemoteFilter
-        data={ this.state.data }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+  };
+  return (
+    <RemoteFilter
+      data={ data }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
 export default Container;

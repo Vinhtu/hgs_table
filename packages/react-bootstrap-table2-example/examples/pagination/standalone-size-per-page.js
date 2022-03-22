@@ -39,28 +39,40 @@ const options = {
   totalSize: products.length
 };
 
-<PaginationProvider
-  pagination={ paginationFactory(options) }
->
-  {
-    ({
-      paginationProps,
-      paginationTableProps
-    }) => (
-      <div>
-        <SizePerPageDropdownStandalone
-          { ...paginationProps }
-        />
-        <BootstrapTable
-          keyField="id"
-          data={ products }
-          columns={ columns }
-          { ...paginationTableProps }
-        />
-      </div>
-    )
-  }
-</PaginationProvider>
+const StandaloneSizePerPage = () => {
+  console.log();
+  return (
+    <div>
+      <PaginationProvider
+        bootstrap4
+        pagination={ paginationFactory(options) }
+      >
+        {
+          ({
+            paginationProps,
+            paginationTableProps
+          }) => (
+            <div>
+              <SizePerPageDropdownStandalone
+                { ...paginationProps }
+                btnContextual="btn btn-warning"
+              />
+              <BootstrapTable
+                keyField="id"
+                data={ products }
+                columns={ columns }
+                { ...paginationTableProps }
+              />
+            </div>
+          )
+        }
+      </PaginationProvider>
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default StandaloneSizePerPage;
 `;
 
 const options = {
@@ -69,36 +81,37 @@ const options = {
 };
 // const pagination = paginationFactory(options);
 
-export default class StandaloneSizePerPage extends React.Component {
-  render() {
-    return (
-      <div>
-        <PaginationProvider
-          bootstrap4
-          pagination={ paginationFactory(options) }
-        >
-          {
-            ({
-              paginationProps,
-              paginationTableProps
-            }) => (
-              <div>
-                <SizePerPageDropdownStandalone
-                  { ...paginationProps }
-                  btnContextual="btn btn-warning"
-                />
-                <BootstrapTable
-                  keyField="id"
-                  data={ products }
-                  columns={ columns }
-                  { ...paginationTableProps }
-                />
-              </div>
-            )
-          }
-        </PaginationProvider>
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+const StandaloneSizePerPage = () => {
+  console.log();
+  return (
+    <div>
+      <PaginationProvider
+        bootstrap4
+        pagination={ paginationFactory(options) }
+      >
+        {
+          ({
+            paginationProps,
+            paginationTableProps
+          }) => (
+            <div>
+              <SizePerPageDropdownStandalone
+                { ...paginationProps }
+                btnContextual="btn btn-warning"
+              />
+              <BootstrapTable
+                keyField="id"
+                data={ products }
+                columns={ columns }
+                { ...paginationTableProps }
+              />
+            </div>
+          )
+        }
+      </PaginationProvider>
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default StandaloneSizePerPage;

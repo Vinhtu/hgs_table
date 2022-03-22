@@ -119,40 +119,35 @@ Table.propTypes = {
   onTableChange: PropTypes.func.isRequired
 };
 
-class EmptyTableOverlay extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+const EmptyTableOverlay = () => {
+  const [state, setState] = React.useState(
+    {
       page: 1,
       data: products.slice(0, 10),
       sizePerPage: 10
-    };
-  }
-
-  handleTableChange = (type, { page, sizePerPage }) => {
+    }
+  );
+  const handleTableChange = (type, { page, sizePerPage }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
-      this.setState(() => ({
+      setState(() => ({ ...state,
         page,
         data: products.slice(currentIndex, currentIndex + sizePerPage),
         sizePerPage
       }));
     }, 3000);
-    this.setState(() => ({ data: [] }));
-  }
-
-  render() {
-    const { data, sizePerPage, page } = this.state;
-    return (
-      <Table
-        data={ data }
-        page={ page }
-        sizePerPage={ sizePerPage }
-        totalSize={ products.length }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+    setState(() => ({ ...state, data: [] }));
+  };
+  const { data, sizePerPage, page } = state;
+  return (
+    <Table
+      data={ data }
+      page={ page }
+      sizePerPage={ sizePerPage }
+      totalSize={ products.length }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
 export default EmptyTableOverlay;

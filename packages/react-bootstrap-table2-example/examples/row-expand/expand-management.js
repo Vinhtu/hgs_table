@@ -85,54 +85,49 @@ class RowExpandManagment extends React.Component {
 }
 `;
 
-export default class RowExpandManagment extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { expanded: [0, 1] };
-  }
 
-  handleBtnClick = () => {
+const RowExpandManagment = () => {
+  const [state, setState] = React.useState({ expanded: [0, 1] });
+  const handleBtnClick = () => {
     if (!this.state.expanded.includes(2)) {
-      this.setState(() => ({
-        expanded: [...this.state.expanded, 2]
+      setState(() => ({
+        expanded: [...state.expanded, 2]
       }));
     } else {
-      this.setState(() => ({
-        expanded: this.state.expanded.filter(x => x !== 2)
+      setState(() => ({
+        expanded: state.expanded.filter(x => x !== 2)
       }));
     }
-  }
-
-  handleOnExpand = (row, isExpand, rowIndex, e) => {
+  };
+  const handleOnExpand = (row, isExpand, rowIndex, e) => {
     if (isExpand) {
-      this.setState(() => ({
-        expanded: [...this.state.expanded, row.id]
+      setState(() => ({
+        expanded: [...state.expanded, row.id]
       }));
     } else {
-      this.setState(() => ({
-        expanded: this.state.expanded.filter(x => x !== row.id)
+      setState(() => ({
+        expanded: state.expanded.filter(x => x !== row.id)
       }));
     }
-  }
-
-  render() {
-    const expandRow = {
-      renderer: row => (
-        <div>
-          <p>{ `This Expand row is belong to rowKey ${row.id}` }</p>
-          <p>You can render anything here, also you can add additional data on every row object</p>
-          <p>expandRow.renderer callback will pass the origin row object to you</p>
-        </div>
-      ),
-      expanded: this.state.expanded,
-      onExpand: this.handleOnExpand
-    };
-    return (
+  };
+  const expandRow = {
+    renderer: row => (
       <div>
-        <button className="btn btn-success" onClick={ this.handleBtnClick }>Expand/Collapse 3rd row</button>
-        <BootstrapTable keyField="id" data={ products } columns={ columns } expandRow={ expandRow } />
-        <Code>{ sourceCode }</Code>
+        <p>{ `This Expand row is belong to rowKey ${row.id}` }</p>
+        <p>You can render anything here, also you can add additional data on every row object</p>
+        <p>expandRow.renderer callback will pass the origin row object to you</p>
       </div>
-    );
-  }
-}
+    ),
+    expanded: state.expanded,
+    onExpand: handleOnExpand
+  };
+  return (
+    <div>
+      <button className="btn btn-success" onClick={ handleBtnClick }>Expand/Collapse 3rd row</button>
+      <BootstrapTable keyField="id" data={ products } columns={ columns } expandRow={ expandRow } />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default RowExpandManagment;

@@ -10,4 +10,3 @@ export default ({ row, rowIndex, visible, x, y }) => visible && (
     <li>Delete</li>
   </ul>
 );
-

@@ -88,19 +88,15 @@ RemoteAll.propTypes = {
   onTableChange: PropTypes.func.isRequired
 };
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: 1,
-      data: products.slice(0, 10),
-      totalSize: products.length,
-      sizePerPage: 10
-    };
-    this.handleTableChange = this.handleTableChange.bind(this);
-  }
-
-  handleTableChange = (type, { page, sizePerPage, filters, sortField, sortOrder, cellEdit }) => {
+const Container = () => {
+  const [state, setState] = React.useState({
+    page: 1,
+    data: products.slice(0, 10),
+    totalSize: products.length,
+    sizePerPage: 10
+  });
+  const handleTableChange = (type,
+    { page, sizePerPage, filters, sortField, sortOrder, cellEdit }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
       // Handle cell editing
@@ -116,7 +112,6 @@ class Container extends React.Component {
         });
       }
       let result = products;
-
       // Handle column filters
       result = result.filter((row) => {
         let valid = true;
@@ -154,28 +149,27 @@ class Container extends React.Component {
           return 0;
         });
       }
-      this.setState(() => ({
+      setState(() => ({ ...state,
         page,
         data: result.slice(currentIndex, currentIndex + sizePerPage),
         totalSize: result.length,
         sizePerPage
       }));
     }, 2000);
-  }
+  };
+  const { data, sizePerPage, page } = state;
+  return (
+    <RemoteAll
+      data={ data }
+      page={ page }
+      sizePerPage={ sizePerPage }
+      totalSize={ state.totalSize }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
-  render() {
-    const { data, sizePerPage, page } = this.state;
-    return (
-      <RemoteAll
-        data={ data }
-        page={ page }
-        sizePerPage={ sizePerPage }
-        totalSize={ this.state.totalSize }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+export default Container;
 `;
 
 const defaultSorted = [{
@@ -214,19 +208,16 @@ RemoteAll.propTypes = {
   onTableChange: PropTypes.func.isRequired
 };
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: 1,
-      data: products.slice(0, 10),
-      totalSize: products.length,
-      sizePerPage: 10
-    };
-    this.handleTableChange = this.handleTableChange.bind(this);
-  }
 
-  handleTableChange = (type, { page, sizePerPage, filters, sortField, sortOrder, cellEdit }) => {
+const Container = () => {
+  const [state, setState] = React.useState({
+    page: 1,
+    data: products.slice(0, 10),
+    totalSize: products.length,
+    sizePerPage: 10
+  });
+  const handleTableChange = (type,
+    { page, sizePerPage, filters, sortField, sortOrder, cellEdit }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
       // Handle cell editing
@@ -279,27 +270,24 @@ class Container extends React.Component {
           return 0;
         });
       }
-      this.setState(() => ({
+      setState(() => ({ ...state,
         page,
         data: result.slice(currentIndex, currentIndex + sizePerPage),
         totalSize: result.length,
         sizePerPage
       }));
     }, 2000);
-  }
-
-  render() {
-    const { data, sizePerPage, page } = this.state;
-    return (
-      <RemoteAll
-        data={ data }
-        page={ page }
-        sizePerPage={ sizePerPage }
-        totalSize={ this.state.totalSize }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+  };
+  const { data, sizePerPage, page } = state;
+  return (
+    <RemoteAll
+      data={ data }
+      page={ page }
+      sizePerPage={ sizePerPage }
+      totalSize={ state.totalSize }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
 export default Container;

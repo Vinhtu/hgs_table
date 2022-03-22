@@ -22,67 +22,64 @@ const columns = [{
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 
-class AdvSelectionManagment extends React.Component {
-  handleOnSelect = (row, isSelect) => {
+
+const AdvSelectionManagment = () => {
+  const handleOnSelect = (row, isSelect) => {
     if (isSelect && row.id < 3) {
       alert('Oops, You can not select Product ID which less than 3');
       return false; // return false to deny current select action
     }
     return true; // return true or dont return to approve current select action
-  }
-
-  handleOnSelectAll = (isSelect, rows) => {
+  };
+  const handleOnSelectAll = (isSelect, rows) => {
     if (isSelect) {
       return rows.filter(r => r.id >= 3).map(r => r.id);
     }
-  }
+  };
+  const selectRow = {
+    mode: 'checkbox',
+    clickToSelect: true,
+    onSelect: handleOnSelect,
+    onSelectAll: handleOnSelectAll
+  };
+  return (
+    <div>
+      <h3>You can not select Product ID less than 3</h3>
+      <BootstrapTable keyField="id" data={ products } columns={ columns } selectRow={ selectRow } />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
 
-  render() {
-    const selectRow = {
-      mode: 'checkbox',
-      clickToSelect: true,
-      onSelect: this.handleOnSelect,
-      onSelectAll: this.handleOnSelectAll
-    };
-    return (
-      <div>
-        <h3>You can not select Product ID less than 3</h3>
-        <BootstrapTable keyField="id" data={ products } columns={ columns } selectRow={ selectRow } />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+export default AdvSelectionManagment;
 `;
 
-export default class AdvSelectionManagment extends React.Component {
-  handleOnSelect = (row, isSelect) => {
+const AdvSelectionManagment = () => {
+  const handleOnSelect = (row, isSelect) => {
     if (isSelect && row.id < 3) {
       alert('Oops, You can not select Product ID which less than 3');
       return false; // return false to deny current select action
     }
     return true; // return true or dont return to approve current select action
-  }
-
-  handleOnSelectAll = (isSelect, rows) => {
+  };
+  const handleOnSelectAll = (isSelect, rows) => {
     if (isSelect) {
       return rows.filter(r => r.id >= 3).map(r => r.id);
     }
-  }
+  };
+  const selectRow = {
+    mode: 'checkbox',
+    clickToSelect: true,
+    onSelect: handleOnSelect,
+    onSelectAll: handleOnSelectAll
+  };
+  return (
+    <div>
+      <h3>You can not select Product ID less than 3</h3>
+      <BootstrapTable keyField="id" data={ products } columns={ columns } selectRow={ selectRow } />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
 
-  render() {
-    const selectRow = {
-      mode: 'checkbox',
-      clickToSelect: true,
-      onSelect: this.handleOnSelect,
-      onSelectAll: this.handleOnSelectAll
-    };
-    return (
-      <div>
-        <h3>You can not select Product ID less than 3</h3>
-        <BootstrapTable keyField="id" data={ products } columns={ columns } selectRow={ selectRow } />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+export default AdvSelectionManagment;

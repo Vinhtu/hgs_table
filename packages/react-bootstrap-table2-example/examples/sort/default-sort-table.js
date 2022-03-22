@@ -48,24 +48,29 @@ const defaultSorted = [{
   order: 'desc'
 }];
 
-<BootstrapTable
-  keyField="id"
-  data={ products }
-  columns={ columns }
-  defaultSorted={ defaultSorted } 
-/>
+const DefaultSortTable = () => {
+  console.log();
+  return (
+    <div>
+      <BootstrapTable keyField="id" data={ products } columns={ columns } defaultSorted={ defaultSorted } />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default DefaultSortTable;
+
 `;
 
 
-class DefaultSortTable extends React.PureComponent {
-  render() {
-    return (
-      <div>
-        <BootstrapTable keyField="id" data={ products } columns={ columns } defaultSorted={ defaultSorted } />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+const DefaultSortTable = () => {
+  console.log();
+  return (
+    <div>
+      <BootstrapTable keyField="id" data={ products } columns={ columns } defaultSorted={ defaultSorted } />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
 
 export default DefaultSortTable;

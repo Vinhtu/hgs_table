@@ -1,7 +1,7 @@
 import React from 'react';
 import Typed from 'typed.js';
 
-const PROJECT_NAME = 'react-bootstrap-table2';
+const PROJECT_NAME = 'HGS-TABLE';
 
 export default class Welcome extends React.Component {
   componentDidMount() {

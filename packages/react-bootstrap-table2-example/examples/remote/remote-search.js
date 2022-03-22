@@ -62,47 +62,35 @@ const RemoteFilter = props => (
   </div>
 );
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: products
-    };
-  }
-
-  handleTableChange = (type, { filters }) => {
+const Container = () => {
+  const [data, setData] = React.useState(products);
+  const handleTableChange = (type, { searchText }) => {
     setTimeout(() => {
       const result = products.filter((row) => {
-        let valid = true;
-        for (const dataField in filters) {
-          const { filterVal, filterType, comparator } = filters[dataField];
-
-          if (filterType === 'TEXT') {
-            if (comparator === Comparator.LIKE) {
-              valid = row[dataField].toString().indexOf(filterVal) > -1;
-            } else {
-              valid = row[dataField] === filterVal;
+        for (let cidx = 0; cidx < columns.length; cidx += 1) {
+          const column = columns[cidx];
+          let targetValue = row[column.dataField];
+          if (targetValue !== null && typeof targetValue !== 'undefined') {
+            targetValue = targetValue.toString().toLowerCase();
+            if (targetValue.indexOf(searchText) > -1) {
+              return true;
             }
           }
-          if (!valid) break;
         }
-        return valid;
+        return false;
       });
-      this.setState(() => ({
-        data: result
-      }));
+      setData(result);
     }, 2000);
-  }
+  };
+  return (
+    <RemoteFilter
+      data={ data }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
-  render() {
-    return (
-      <RemoteFilter
-        data={ this.state.data }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+export default Container;
 `;
 
 const RemoteFilter = props => (
@@ -133,15 +121,10 @@ RemoteFilter.propTypes = {
   onTableChange: PropTypes.func.isRequired
 };
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: products
-    };
-  }
 
-  handleTableChange = (type, { searchText }) => {
+const Container = () => {
+  const [data, setData] = React.useState(products);
+  const handleTableChange = (type, { searchText }) => {
     setTimeout(() => {
       const result = products.filter((row) => {
         for (let cidx = 0; cidx < columns.length; cidx += 1) {
@@ -156,20 +139,15 @@ class Container extends React.Component {
         }
         return false;
       });
-      this.setState(() => ({
-        data: result
-      }));
+      setData(result);
     }, 2000);
-  }
-
-  render() {
-    return (
-      <RemoteFilter
-        data={ this.state.data }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+  };
+  return (
+    <RemoteFilter
+      data={ data }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
 export default Container;

@@ -90,61 +90,54 @@ const MyExportCSV = (props) => {
   );
 };
 
-class ExportOnlyFilterChoose extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      onlyFilter: true
-    };
-  }
-  onChangeFalse = () => {
-    this.setState({ onlyFilter: false });
+const ExportOnlyFilterChoose = () => {
+  const [onlyFilter, setOnlyFilter] = React.useState(true);
+  const onChangeFalse = () => {
+    setOnlyFilter(false);
   };
-  onChangeTrue = () => {
-    this.setState({ onlyFilter: true });
+  const onChangeTrue = () => {
+    setOnlyFilter(true);
   };
-  render() {
-    return (
-      <div>
-        <h3>Export all the filtered/searched rows</h3>
-        <ToolkitProvider
-          keyField="id"
-          data={ products }
-          columns={ columns }
-          exportCSV={ { onlyExportFiltered: this.state.onlyFilter, exportAll: false } }
-          search
-        >
-          {
-            props => (
-              <div>
-                <div style={ { display: 'flex' } }>
-                  <div style={ { marginRight: 4 } }>
-                    <ExportCSVButton onClick={ () => this.onChangeTrue() } >
-                      Export All Page
-                    </ExportCSVButton>
-                  </div>
-                  <div style={ { marginRight: 4 } }>
-                    <ExportCSVButton onClick={ () => this.onChangeFalse() } >
-                      Export Current Page
-                    </ExportCSVButton>
-                  </div>
-                  <MyExportCSV { ...props.csvProps } />
+  return (
+    <div>
+      <h3>Export all the filtered/searched rows</h3>
+      <ToolkitProvider
+        keyField="id"
+        data={ products }
+        columns={ columns }
+        exportCSV={ { onlyExportFiltered: onlyFilter, exportAll: false } }
+        search
+      >
+        {
+          props => (
+            <div>
+              <div style={ { display: 'flex' } }>
+                <div style={ { marginRight: 4 } }>
+                  <ExportCSVButton onClick={ () => onChangeTrue() } >
+                    Export All Page
+                  </ExportCSVButton>
                 </div>
-                <hr />
-                <SearchBar { ...props.searchProps } />
-                <BootstrapTable
-                  { ...props.baseProps }
-                  pagination={ paginationFactory() }
-                  filter={ filterFactory() }
-                />
+                <div style={ { marginRight: 4 } }>
+                  <ExportCSVButton onClick={ () => onChangeFalse() } >
+                    Export Current Page
+                  </ExportCSVButton>
+                </div>
+                <MyExportCSV { ...props.csvProps } />
               </div>
-            )
-          }
-        </ToolkitProvider>
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+              <hr />
+              <SearchBar { ...props.searchProps } />
+              <BootstrapTable
+                { ...props.baseProps }
+                pagination={ paginationFactory() }
+                filter={ filterFactory() }
+              />
+            </div>
+          )
+        }
+      </ToolkitProvider>
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
 
 export default ExportOnlyFilterChoose;

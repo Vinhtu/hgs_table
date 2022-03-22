@@ -84,63 +84,50 @@ class Case2 extends React.Component {
 `;
 
 const products1 = productsGenerator(8);
-class WithoutPaginationCase extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { rowCount: products1.length };
-  }
+const WithoutPaginationCase = () => {
+  const [rowCount, setRowCount] = React.useState(products1.length);
+  const handleDataChange = ({ dataSize }) => {
+    setRowCount(dataSize);
+  };
+  return (
+    <div>
+      <h3>Without Pagination Case</h3>
+      <h5>Row Count:<span className="badge">{ rowCount }</span></h5>
+      <BootstrapTable
+        onDataSizeChange={ handleDataChange }
+        keyField="id"
+        data={ products1 }
+        columns={ columns }
+        filter={ filterFactory() }
+      />
+      <Code>{ sourceCode2 }</Code>
+    </div>
+  );
+};
 
-  handleDataChange = ({ dataSize }) => {
-    this.setState({ rowCount: dataSize });
-  }
-
-  render() {
-    return (
-      <div>
-        <h3>Without Pagination Case</h3>
-        <h5>Row Count:<span className="badge">{ this.state.rowCount }</span></h5>
-        <BootstrapTable
-          onDataSizeChange={ this.handleDataChange }
-          keyField="id"
-          data={ products1 }
-          columns={ columns }
-          filter={ filterFactory() }
-        />
-        <Code>{ sourceCode2 }</Code>
-      </div>
-    );
-  }
-}
 
 const products2 = productsGenerator(88);
-class WithPaginationCase extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { rowCount: products2.length };
-  }
-
-  handleDataChange = ({ dataSize }) => {
-    this.setState({ rowCount: dataSize });
-  }
-
-  render() {
-    return (
-      <div>
-        <h3>Without Pagination Case</h3>
-        <h5>Row Count:<span className="badge">{ this.state.rowCount }</span></h5>
-        <BootstrapTable
-          onDataSizeChange={ this.handleDataChange }
-          keyField="id"
-          data={ products2 }
-          columns={ columns }
-          filter={ filterFactory() }
-          pagination={ paginationFactory() }
-        />
-        <Code>{ sourceCode1 }</Code>
-      </div>
-    );
-  }
-}
+const WithPaginationCase = () => {
+  const [rowCount, setRowCount] = React.useState(products2.length);
+  const handleDataChange = ({ dataSize }) => {
+    setRowCount(dataSize);
+  };
+  return (
+    <div>
+      <h3>Without Pagination Case</h3>
+      <h5>Row Count:<span className="badge">{ rowCount }</span></h5>
+      <BootstrapTable
+        onDataSizeChange={ handleDataChange }
+        keyField="id"
+        data={ products2 }
+        columns={ columns }
+        filter={ filterFactory() }
+        pagination={ paginationFactory() }
+      />
+      <Code>{ sourceCode1 }</Code>
+    </div>
+  );
+};
 
 export default () => (
   <div>

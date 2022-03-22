@@ -35,31 +35,43 @@ const columns = [{
   text: 'Product Price'
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } />
-`;
-
-export default class Test extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { data: products };
-  }
-
-  handleClick = () => {
-    this.setState(() => {
+const Test = () => {
+  const [state, setState] = React.useState({ data: products });
+  const handleClick = () => {
+    setState(() => {
       const newProducts = productsGenerator(21);
       return {
-        data: newProducts
+        ...state, data: newProducts
       };
     });
-  }
+  };
+  return (
+    <div>
+      <button className="btn btn-default" onClick={ handleClick }>Change Data</button>
+      <BootstrapTable keyField="id" data={ state.data } columns={ columns } />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div>
-        <button className="btn btn-default" onClick={ this.handleClick }>Change Data</button>
-        <BootstrapTable keyField="id" data={ this.state.data } columns={ columns } />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+export default Test;`;
+const Test = () => {
+  const [state, setState] = React.useState({ data: products });
+  const handleClick = () => {
+    setState(() => {
+      const newProducts = productsGenerator(21);
+      return {
+        ...state, data: newProducts
+      };
+    });
+  };
+  return (
+    <div>
+      <button className="btn btn-default" onClick={ handleClick }>Change Data</button>
+      <BootstrapTable keyField="id" data={ state.data } columns={ columns } />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
+
+export default Test;

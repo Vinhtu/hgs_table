@@ -10,109 +10,102 @@ const products = productsGenerator();
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 
-class SortManagement extends React.Component {
-  state = {
-    field: null,
-    order: null
-  }
 
-  handleSort = (field, order) => {
-    this.setState({
+const SortManagement = () => {
+  const [state, setState] = React.useState({ field: null, order: null });
+  const handleSort = (field, order) => {
+    setState({
+      ...state,
       field,
       order
     });
-  }
-
-  handleSortById = () => {
-    this.setState({
+  };
+  const handleSortById = () => {
+    setState({
+      ...state,
       field: 'id',
       order: 'desc'
     });
-  }
+  };
+  const columns = [{
+    dataField: 'id',
+    text: 'Product ID',
+    sort: true,
+    onSort: handleSort
+  }, {
+    dataField: 'name',
+    text: 'Product Name',
+    sort: true,
+    onSort: handleSort
+  }, {
+    dataField: 'price',
+    text: 'Product Price'
+  }];
+  return (
+    <div>
+      <button className="btn btn-danger" onClick={ handleSortById }>Sort By ID</button>
+      <BootstrapTable
+        keyField="id"
+        data={ products }
+        columns={ columns }
+        sort={ {
+          dataField: state.field,
+          order: state.order
+        } }
+      />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
 
-  render() {
-    const columns = [{
-      dataField: 'id',
-      text: 'Product ID',
-      sort: true,
-      onSort: this.handleSort
-    }, {
-      dataField: 'name',
-      text: 'Product Name',
-      sort: true,
-      onSort: this.handleSort
-    }, {
-      dataField: 'price',
-      text: 'Product Price'
-    }];
-    return (
-      <div>
-        <button className="btn btn-danger" onClick={ this.handleSortById }>Sort By ID</button>
-        <BootstrapTable
-          keyField="id"
-          data={ products }
-          columns={ columns }
-          sort={ {
-            dataField: this.state.field,
-            order: this.state.order
-          } }
-        />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+export default SortManagement;
 `;
 
-export default class SortManagement extends React.Component {
-  state = {
-    field: null,
-    order: null
-  }
-
-  handleSort = (field, order) => {
-    this.setState({
+const SortManagement = () => {
+  const [state, setState] = React.useState({ field: null, order: null });
+  const handleSort = (field, order) => {
+    setState({
+      ...state,
       field,
       order
     });
-  }
-
-  handleSortById = () => {
-    this.setState({
+  };
+  const handleSortById = () => {
+    setState({
+      ...state,
       field: 'id',
       order: 'desc'
     });
-  }
+  };
+  const columns = [{
+    dataField: 'id',
+    text: 'Product ID',
+    sort: true,
+    onSort: handleSort
+  }, {
+    dataField: 'name',
+    text: 'Product Name',
+    sort: true,
+    onSort: handleSort
+  }, {
+    dataField: 'price',
+    text: 'Product Price'
+  }];
+  return (
+    <div>
+      <button className="btn btn-danger" onClick={ handleSortById }>Sort By ID</button>
+      <BootstrapTable
+        keyField="id"
+        data={ products }
+        columns={ columns }
+        sort={ {
+          dataField: state.field,
+          order: state.order
+        } }
+      />
+      <Code>{ sourceCode }</Code>
+    </div>
+  );
+};
 
-  render() {
-    const columns = [{
-      dataField: 'id',
-      text: 'Product ID',
-      sort: true,
-      onSort: this.handleSort
-    }, {
-      dataField: 'name',
-      text: 'Product Name',
-      sort: true,
-      onSort: this.handleSort
-    }, {
-      dataField: 'price',
-      text: 'Product Price'
-    }];
-    return (
-      <div>
-        <button className="btn btn-danger" onClick={ this.handleSortById }>Sort By ID</button>
-        <BootstrapTable
-          keyField="id"
-          data={ products }
-          columns={ columns }
-          sort={ {
-            dataField: this.state.field,
-            order: this.state.order
-          } }
-        />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
+export default SortManagement;

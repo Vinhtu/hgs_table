@@ -49,19 +49,13 @@ const RemoteSort = props => (
   </div>
 );
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: products
-    };
-  }
-
-  handleTableChange = (type, { sortField, sortOrder, data }) => {
+const Container = () => {
+  const [data, setData] = React.useState(products);
+  const handleTableChange = (type, { sortField, sortOrder, datas }) => {
     setTimeout(() => {
       let result;
       if (sortOrder === 'asc') {
-        result = data.sort((a, b) => {
+        result = datas.sort((a, b) => {
           if (a[sortField] > b[sortField]) {
             return 1;
           } else if (b[sortField] > a[sortField]) {
@@ -70,7 +64,7 @@ class Container extends React.Component {
           return 0;
         });
       } else {
-        result = data.sort((a, b) => {
+        result = datas.sort((a, b) => {
           if (a[sortField] > b[sortField]) {
             return -1;
           } else if (b[sortField] > a[sortField]) {
@@ -79,21 +73,18 @@ class Container extends React.Component {
           return 0;
         });
       }
-      this.setState(() => ({
-        data: result
-      }));
+      setData(result);
     }, 2000);
-  }
+  };
+  return (
+    <RemoteSort
+      data={ data }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
-  render() {
-    return (
-      <RemoteSort
-        data={ this.state.data }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+export default Container;
 `;
 
 const RemoteSort = props => (
@@ -114,19 +105,13 @@ RemoteSort.propTypes = {
   onTableChange: PropTypes.func.isRequired
 };
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: products
-    };
-  }
-
-  handleTableChange = (type, { sortField, sortOrder, data }) => {
+const Container = () => {
+  const [data, setData] = React.useState(products);
+  const handleTableChange = (type, { sortField, sortOrder, datas }) => {
     setTimeout(() => {
       let result;
       if (sortOrder === 'asc') {
-        result = data.sort((a, b) => {
+        result = datas.sort((a, b) => {
           if (a[sortField] > b[sortField]) {
             return 1;
           } else if (b[sortField] > a[sortField]) {
@@ -135,7 +120,7 @@ class Container extends React.Component {
           return 0;
         });
       } else {
-        result = data.sort((a, b) => {
+        result = datas.sort((a, b) => {
           if (a[sortField] > b[sortField]) {
             return -1;
           } else if (b[sortField] > a[sortField]) {
@@ -144,20 +129,15 @@ class Container extends React.Component {
           return 0;
         });
       }
-      this.setState(() => ({
-        data: result
-      }));
+      setData(result);
     }, 2000);
-  }
-
-  render() {
-    return (
-      <RemoteSort
-        data={ this.state.data }
-        onTableChange={ this.handleTableChange }
-      />
-    );
-  }
-}
+  };
+  return (
+    <RemoteSort
+      data={ data }
+      onTableChange={ handleTableChange }
+    />
+  );
+};
 
 export default Container;

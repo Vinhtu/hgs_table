@@ -48,33 +48,27 @@ const ProductList = (props) => {
   );
 };
 
-export default class DataContainer extends React.Component {
-  state = {
-    products: productsGenerator(3)
+const DataContainer = () => {
+  const [products, setProducts] = React.useState(productsGenerator(3));
+  const loadData = () => {
+    setProducts(productsGenerator(14));
   };
+  return (
+    <div>
+      <button
+        onClick={ loadData }
+        style={ {
+          fontSize: '20px',
+          position: 'absolute',
+          left: '200px',
+          top: '40px'
+        } }
+      >
+        Load Data
+      </button>
+      <ProductList products={ products } />
+    </div>
+  );
+};
 
-  loadData = () => {
-    this.setState({
-      products: productsGenerator(14)
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <button
-          onClick={ this.loadData }
-          style={ {
-            fontSize: '20px',
-            position: 'absolute',
-            left: '200px',
-            top: '40px'
-          } }
-        >
-          Load Data
-        </button>
-        <ProductList products={ this.state.products } />
-      </div>
-    );
-  }
-}
+export default DataContainer;
